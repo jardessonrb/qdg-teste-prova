@@ -23,7 +23,7 @@ public class UserSpecification {
                 return criteriaBuilder.conjunction();
             }
 
-            return criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + phoneFilter + "%");
+            return criteriaBuilder.like(criteriaBuilder.lower(root.get("phone")), "%" + phoneFilter + "%");
         });
     }
 
@@ -33,7 +33,7 @@ public class UserSpecification {
                 return criteriaBuilder.conjunction();
             }
 
-            return criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + cpfFilter + "%");
+            return criteriaBuilder.equal(root.get("cpf"), cpfFilter);
         });
     }
 }
