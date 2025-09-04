@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class DataSeeder {
+
     @Bean
     CommandLineRunner seed(AppUserRepository repo, PasswordEncoder encoder) {
         return args -> {
