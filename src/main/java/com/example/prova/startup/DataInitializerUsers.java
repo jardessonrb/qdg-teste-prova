@@ -6,6 +6,7 @@ import com.example.prova.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -14,6 +15,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Component
+@Profile("!test")
 public class DataInitializerUsers implements CommandLineRunner {
 
     private final UserService userService;
