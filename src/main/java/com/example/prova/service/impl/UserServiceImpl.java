@@ -9,6 +9,7 @@ import com.example.prova.repository.user.UserRepository;
 import com.example.prova.repository.user.UserSpecification;
 import com.example.prova.repository.user.UserSpecificationBuilder;
 import com.example.prova.service.UserService;
+import com.example.prova.shared.exception.EntityAlreadyExistException;
 import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -44,7 +45,7 @@ public class UserServiceImpl implements UserService {
         String phoneNotMask = userForm.phone().replaceAll("\\D", "");
 
         if(userRepository.existsByCpf(cpfNotMask)){
-            throw new EntityExistsException("Exist user with cpf "+userForm.cpf());
+            throw new EntityAlreadyExistException("Exist user with cpf "+userForm.cpf());
         }
 
         User user = User
