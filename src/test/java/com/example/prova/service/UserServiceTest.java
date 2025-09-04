@@ -5,7 +5,7 @@ import com.example.prova.dto.UserCreatedResponse;
 import com.example.prova.dto.UserFilter;
 import com.example.prova.fake.UserFake;
 import com.example.prova.repository.user.UserRepository;
-import jakarta.persistence.EntityExistsException;
+import com.example.prova.shared.exception.EntityAlreadyExistException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +58,7 @@ public class UserServiceTest {
                 () -> userService.createUser(validUser)
         );
 
-        EntityExistsException exception = assertThrows(EntityExistsException.class,
+        EntityAlreadyExistException exception = assertThrows(EntityAlreadyExistException.class,
                 () -> userService.createUser(validUser)
         );
 
