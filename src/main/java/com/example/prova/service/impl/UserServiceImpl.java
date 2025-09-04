@@ -1,5 +1,6 @@
 package com.example.prova.service.impl;
 
+import com.example.prova.dto.PageResponse;
 import com.example.prova.dto.UserCreateRequest;
 import com.example.prova.dto.UserCreatedResponse;
 import com.example.prova.dto.UserFilter;
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public Page<UserCreatedResponse> pagedUserSearch(UserFilter filter, Pageable pagination) {
+    public PageResponse<UserCreatedResponse> pagedUserSearch(UserFilter filter, Pageable pagination) {
         Specification<User> specification = UserSpecificationBuilder
                 .builder()
                 .and(UserSpecification.filterByNameContainsIgnoreCase(filter.name()))
@@ -34,7 +35,7 @@ public class UserServiceImpl implements UserService {
 
         Page<User> usersPage = userRepository.findAll(specification, pagination);
 
-        return usersPage.map(UserCreatedResponse::new);
+        return new PageResponse<>(usersPage.map(UserCreatedResponse::new));
     }
 
     @Override
