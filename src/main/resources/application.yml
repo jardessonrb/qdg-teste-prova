@@ -3,6 +3,8 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: prova
   datasource:
     url: jdbc:h2:mem:authdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE
     driverClassName: org.h2.Driver
