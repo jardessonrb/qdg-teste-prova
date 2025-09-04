@@ -1,6 +1,7 @@
 package com.example.prova.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -38,4 +39,11 @@ public class User implements Serializable {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @Builder
+    public User(String name, String cpf, String phone){
+        this.name = name;
+        this.cpf = cpf;
+        this.phone = phone;
+    }
 }
