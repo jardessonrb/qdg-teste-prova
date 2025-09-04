@@ -1,5 +1,6 @@
 package com.example.prova.service.impl;
 
+import com.example.prova.dto.UserCreateRequest;
 import com.example.prova.dto.UserCreatedResponse;
 import com.example.prova.dto.UserFilter;
 import com.example.prova.entity.User;
@@ -7,6 +8,7 @@ import com.example.prova.repository.user.UserRepository;
 import com.example.prova.repository.user.UserSpecification;
 import com.example.prova.repository.user.UserSpecificationBuilder;
 import com.example.prova.service.UserService;
+import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,5 +35,24 @@ public class UserServiceImpl implements UserService {
         Page<User> usersPage = userRepository.findAll(specification, pagination);
 
         return usersPage.map(UserCreatedResponse::new);
+    }
+
+    @Override
+    public UserCreatedResponse createUser(UserCreateRequest userForm) {
+        String cpfNotMask = userForm.cpf().replaceAll("\\D", "");
+        String phoneNotMask = userForm.phone().replaceAll("\\D", "");
+
+        if(userRepository.existsByCpf(cpfNotMask)){
+            throw new EntityExistsException("Exist user with cpf "+userForm.cpf());
+        }
+
+        User user = User
+                .builder()
+                .name(userForm.name())
+                .cpf(cpfNotMask)
+                .phone(phoneNotMask)
+                .build();
+
+        return new UserCreatedResponse(userRepository.save(user));
     }
 }
