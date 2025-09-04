@@ -1,8 +1,9 @@
 package com.example.prova.dto;
 
-import org.hibernate.validator.constraints.UUID;
+import com.example.prova.entity.User;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public record UserCreatedResponse(
         UUID id,
@@ -10,4 +11,8 @@ public record UserCreatedResponse(
         String cpf,
         String phone,
         LocalDateTime createdAt
-) {}
+) {
+    public UserCreatedResponse(User model){
+        this(model.getUuid(), model.getName(), model.getCpf(), model.getPhone(), model.getCreatedAt());
+    }
+}
