@@ -1,6 +1,7 @@
 package com.example.prova.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -9,6 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Getter
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable {
