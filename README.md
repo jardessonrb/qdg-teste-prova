@@ -45,11 +45,11 @@ Use o token retornado para acessar rotas protegidas (ex.: `GET /api/ping`).
 
 
 ## Implementados
-  - Implementado ``` GET /api/users ``` com os seguintes parâmetros
+  - Implementado endpoint ``` GET /api/users ``` com os seguintes parâmetros, retornando um ``` PageResponse ``` que é um DTO para retorno no lugar de Page.
     
-    - name - filtro com ilike no name quando enviado
-    - phone - filtro com ilike no phone quando enviado
-    - cpf - filtro com equal no cpf do usuário (CPF único na base)
+    - name - filtro com ``` ilike ``` no name quando enviado
+    - phone - filtro com ``` ilike ``` no phone quando enviado
+    - cpf - filtro com  ``` equal ``` no cpf do usuário (CPF único na base) quando enviado
    
   - Implementados testes unitários
 
@@ -59,8 +59,8 @@ Use o token retornado para acessar rotas protegidas (ex.: `GET /api/ping`).
     - teste unitário para todos os filtros
     
   - Implementado specification
-    - implementado filtros através de specifications usando no repository ```JpaSpecificationExecutor<User>```
-    - implementado ````UserSpecificationBuilder```` usando o design pattern builder para construção de filtros dinâmicos como no exemplo
+    - implementado filtros através de specifications, usado no repository com ```JpaSpecificationExecutor<User>```
+    - implementado ````UserSpecificationBuilder```` usando o design pattern builder para construção de filtros dinâmicos como no exemplo abaixo
       - ``` 
         UserSpecificationBuilder
                 .builder()
@@ -69,5 +69,5 @@ Use o token retornado para acessar rotas protegidas (ex.: `GET /api/ping`).
                 .and(UserSpecification.filterByCPFContainsNotMask(Objects.nonNull(filter.cpf()) ? filter.cpf().replaceAll("\\D", "") : null))
                 .build()
         ```
-  - Implementado ````handlder```` para interceptar e padronização de exceptions na API usando o ``` @RestControllerAdvice ```
-  - Implementado ```DataInitializerUsers``` para criação de usuários iniciais quando subir a API
+  - Implementado ```` handlder ```` para interceptar e padronizar o retorno de exceptions na API usando o ``` @RestControllerAdvice ```
+  - Implementado ``` DataInitializerUsers ``` para criação de usuários iniciais quando subir a API.
